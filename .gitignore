@@ -1,0 +1,14 @@
+*
+!README.md
+!.gitignore
+!.travis.yml
+!.gitkeep
+!*.c
+!*.h
+!bin
+!build
+!src
+!test
+!thirdparty
+!Makefile
+
