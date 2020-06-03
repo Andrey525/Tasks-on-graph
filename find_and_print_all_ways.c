@@ -169,6 +169,55 @@ void print_all_ways(struct graph* g, int ways[10][10], int way, int end)
         printf("%s, Длина пути = %d\n", g->name[end], dist);
     }
 }
+
+void print_longest_way(struct graph* g, int ways[10][10], int way, int end)
+{
+    int max = -1, max_id = 0;
+    for (int i = 0; i < way; i++) {
+        int dist = 0;
+        for (int j = 0; ways[i][j] != end; j++) {
+            dist += g->mat[ways[i][j]][ways[i][j + 1]];
+        }
+        if (max < dist) {
+            max_id = i;
+            max = dist;
+        }
+    }
+    printf("Длиннейший маршрут %s ----> %s:\n", g->name[ways[max_id][0]], g->name[end]);
+    for (int i = 0; ways[max_id][i] != end; i++) {
+        printf("%s", g->name[ways[max_id][i]]);
+        printf(" --(%d)--> ", g->mat[ways[max_id][i]][ways[max_id][i + 1]]);
+    }
+    printf("%s", g->name[end]);
+    printf(", Длина маршрута = %d км\n", max);
+}
+
+void command_for_search_longest_way(int start, int end)
+{
+    struct graph* g = graph_create(V);
+    graph_set(g);
+    struct Tree* Cor = malloc(sizeof(*Cor));
+
+    int way = 0;
+    int ways[10][10];
+
+    for (int i = 0; i < V; i++) {
+        Cor->parents[i] = -1;
+    }
+
+    init_node(Cor, start, Cor->parents);
+    Cor->parents[0] = start;
+
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            ways[i][j] = 0;
+        }
+    }
+    Cor->stat = 1;
+    find_num_of_ways(g, Cor, Cor->parents, start, end, ways, &way);
+    print_longest_way(g, ways, way, end);
+}
+
 void command_for_search_all_ways(int start, int end)
 {
     struct graph* g = graph_create(V);
@@ -202,4 +251,11 @@ int main()
     printf("\n");
     start = 1, end = 0;
     command_for_search_all_ways(start, end);
+
+    printf("\n");
+    start = 0, end = 1;
+    command_for_search_longest_way(start, end);
+    printf("\n");
+    start = 1, end = 0;
+    command_for_search_longest_way(start, end);
 }
