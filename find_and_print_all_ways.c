@@ -159,8 +159,8 @@ void find_num_of_ways(struct graph* g, struct Tree* tree, int parents[], int sta
 }
 void print_all_ways(struct graph* g, int ways[10][10], int way, int end)
 {
-    int dist = 0;
     for (int i = 0; i < way; i++) {
+        int dist = 0;
         for (int j = 0; ways[i][j] != end; j++) {
             printf("%s", g->name[ways[i][j]]);
             printf(" --(%d)-->", g->mat[ways[i][j]][ways[i][j + 1]]);
