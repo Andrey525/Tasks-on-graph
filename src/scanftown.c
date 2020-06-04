@@ -1,9 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "main.h"
 
-char *scanf_town_departure(char *departure);
-char *scanf_town_arrival(char *arrival);
+void printtown()
+{
+    printf("Список городов для поиска маршрута\n\n");
+    printf("1.Новосибрск\n");
+    printf("2.Омск\n");
+    printf("3.Кемерово\n");
+    printf("4.Томск\n");
+    printf("5.Барнаул\n");
+    printf("6.Красноярск\n");
+}
 
 void checklong(char *departure, char *arrival)
 {
@@ -45,15 +51,15 @@ char* scanf_town_arrival(char* arrival)
     return arrival;
 }
 
-int main()
-{
-    char *departure, *arrival;
-    departure = malloc(sizeof(char) * 30);
-    arrival = malloc(sizeof(char) * 30);
-    departure = scanf_town_departure(departure);
-    arrival = scanf_town_arrival(arrival);
-    checklong(departure, arrival);
-    printf("Отправление: %s\n", departure);
-    printf("Прибытие: %s\n", arrival);
-    return 0;
-}
+// int main()
+// {
+//     char *departure, *arrival;
+//     departure = malloc(sizeof(char) * 30);
+//     arrival = malloc(sizeof(char) * 30);
+//     departure = scanf_town_departure(departure);
+//     arrival = scanf_town_arrival(arrival);
+//     checklong(departure, arrival);
+//     printf("Отправление: %s\n", departure);
+//     printf("Прибытие: %s\n", arrival);
+//     return 0;
+// }

@@ -1,5 +1,7 @@
 #include "graph.h"
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 /*
 Индексы:
                   1   2   3   4   5   6
