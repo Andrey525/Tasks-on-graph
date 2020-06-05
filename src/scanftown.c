@@ -11,7 +11,7 @@ void printtown()
     printf("6.Красноярск\n");
 }
 
-void checklong(char *departure, char *arrival)
+void checklong(char* departure, char* arrival)
 {
     int count1 = 0;
     int count2 = 0;
@@ -20,16 +20,14 @@ void checklong(char *departure, char *arrival)
     count1 = count1 / 2; //русские буквы кодируются 2 байтами,
     count2 = count2 / 2; //поэтому делим на 2.(кодировка unicode)
 
-    while (count1 > 15)
-    {
+    while (count1 > 15) {
         printf("Вы ввели слишком длинное слово, повторите попытку!\n");
         departure = scanf_town_departure(departure);
         count1 = strlen(departure);
         count1 = count1 / 2;
     }
 
-    while (count2 > 15)
-    {
+    while (count2 > 15) {
         printf("Вы ввели слишком длинное слово, повторите попытку\n");
         arrival = scanf_town_arrival(arrival);
         count2 = strlen(arrival);

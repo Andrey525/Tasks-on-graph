@@ -3,7 +3,7 @@
 #define V 6
 
 struct graph {
-    unsigned int nversh; // Число вершин
+    unsigned int nversh;    // Число вершин
     unsigned int (*mat)[V]; // Матрица n x n
     char* name[V];
 };
