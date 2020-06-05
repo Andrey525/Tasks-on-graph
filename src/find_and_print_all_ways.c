@@ -14,7 +14,6 @@ void init_node(struct Tree* tree, int name, int parents[])
     tree->name = name;
     for (int i = 0; i < V; i++) {
         tree->child[i] = calloc(sizeof(tree->child[i]), 1);
-        tree->child[i]->stat = -1;
     }
     for (int i = 0; i < V; i++) {
         tree->parents[i] = parents[i];
@@ -51,7 +50,6 @@ void find_num_of_ways(
                     tree->parents[chek(parents, name_id)] = start;
                 }
                 init_node(tree->child[j], name_id, tree->parents);
-                tree->child[j]->stat = 1;
                 find_num_of_ways(
                         g,
                         tree->child[j],
@@ -91,7 +89,7 @@ void print_all_ways(struct graph* g, int (*ways)[V], int way, int end)
             printf(" --(%d)--> ", g->mat[ways[i][j]][ways[i][j + 1]]);
             dist += g->mat[ways[i][j]][ways[i][j + 1]];
         }
-        printf("%s, Длина маршрута = %d\n", g->name[end], dist);
+        printf("%s, Длина маршрута = %d км\n", g->name[end], dist);
     }
 }
 int print_longest_way(struct graph* g, int (*ways)[V], int way, int end)
@@ -156,46 +154,17 @@ void mat_to_zero(int (*mat)[V], int n, int k)
 void command_for_search(
         struct graph* g, int start, int end, int (*ways)[V], int* way)
 {
-    struct Tree* Cor = malloc(sizeof(*Cor));
+    struct Tree* tree = malloc(sizeof(*tree));
 
     for (int i = 0; i < V; i++) {
-        Cor->parents[i] = -1;
+        tree->parents[i] = -1;
     }
 
-    init_node(Cor, start, Cor->parents);
-    Cor->parents[0] = start;
+    init_node(tree, start, tree->parents);
+    tree->parents[0] = start;
     mat_to_zero(ways, 20, V);
 
-    Cor->stat = 1;
-    find_num_of_ways(g, Cor, Cor->parents, start, end, ways, way);
-}
-void sort_ways(int (*ways)[V], int way, int end)
-{
-    int temp[way];
-    int tmp;
-    for (int j = 0; j < way; j++) {
-        temp[j] = 0;
-    }
-    for (int i = 0; i < way; i++) {
-        for (int j = 0; ways[i][j] != end; j++) {
-            temp[i] += 1;
-        }
-        temp[i] += 1;
-    }
-    for (int i = 0; i < way; i++) {
-        for (int j = 0; j < way; j++) {
-            if (temp[i] < temp[j]) {
-                for (int k = 0; k < V; k++) {
-                    tmp = ways[i][k];
-                    ways[i][k] = ways[j][k];
-                    ways[j][k] = tmp;
-                }
-                tmp = temp[i];
-                temp[i] = temp[j];
-                temp[j] = tmp;
-            }
-        }
-    }
+    find_num_of_ways(g, tree, tree->parents, start, end, ways, way);
 }
 // int main()
 // {
@@ -204,7 +173,6 @@ void sort_ways(int (*ways)[V], int way, int end)
 //     int start = 1, end = 5, way = 0;
 //     int ways[20][V];
 //     command_for_search(g, start, end, ways, &way);
-//     sort_ways(ways, way, end);
 //     print_all_ways(g, ways, way, end);
 //     printf("\n");
 //     print_longest_way(g, ways, way, end);

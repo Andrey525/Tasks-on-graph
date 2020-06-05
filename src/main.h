@@ -11,7 +11,6 @@ struct Tree {
     struct Tree* child[V];
     int parents[V];
     int name;
-    int stat;
 };
 
 // find_and_print_all_ways.c
