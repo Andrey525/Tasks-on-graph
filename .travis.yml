@@ -1,0 +1,16 @@
+dist: xenial
+language: c
+compiler: gcc
+script:
+  - git ls-files src/ | xargs clang-format -i && git diff --exit-code
+  - make longest-test
+  - make shortest-test
+  - make shortest-route-test
+  - make longest-route-test
+  - make all-way-test
+  - cd bin
+  - ./longest-test
+  - ./shortest-test
+  - ./longest-route-test
+  - ./shortest-route-test
+  - ./all-way-test
