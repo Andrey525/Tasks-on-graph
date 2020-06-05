@@ -17,7 +17,16 @@ int main()
         scanf_town_departure(departure);
         scanf_town_arrival(arrival);
         while (check_for_exist(arrival, g->name) == -1
-            || check_for_exist(departure, g->name) == -1) {
+            || check_for_exist(departure, g->name) == -1 || !strcmp(arrival, departure)) {
+            if (!strcmp(arrival, departure) && check_for_exist(departure, g->name) != -1 && check_for_exist(arrival, g->name) != -1) {
+                printf("Имена городов должны различаться.\n");
+                for (int i = 0; i < 20; i++) {
+                    arrival[i] = '\0';
+                    departure[i] = '\0';
+                }
+                scanf_town_departure(departure);
+                scanf_town_arrival(arrival);
+            }
             if (check_for_exist(arrival, g->name) == -1
                 && check_for_exist(departure, g->name) > -1) {
                 printf("Город отправки %s отсутствует в списке городов "
