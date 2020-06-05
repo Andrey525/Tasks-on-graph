@@ -41,50 +41,53 @@ int main()
 			}
 			checklong(arrival, departure);
 		}
-    	int start = check_for_exist(arrival, g->name), end = check_for_exist(departure, g->name), way = 0;
+    	int start = check_for_exist(departure, g->name), end = check_for_exist(arrival, g->name), way = 0;
     	int ways[20][V];
-    	char* answers[11];
+    	char* answers[13];
     	char ans[45];
-    	for (int i = 0; i <= 11; i++) {
+    	for (int i = 0; i <= 13; i++) {
        		answers[i] = malloc(sizeof(char) * 90);
     	}
     	strcpy(answers[0], "Кратчайший маршрут\n");
     	strcpy(answers[1], "Длиннейший маршрут\n");
     	strcpy(answers[2], "Количество всех маршрутов\n");
 		strcpy(answers[3], "Полная информация о маршруте\n");
-		strcpy(answers[4], "Выход из программы\n");
-		strcpy(answers[5], "1\n");
-		strcpy(answers[6], "2\n");
-		strcpy(answers[7], "3\n");
-		strcpy(answers[8], "4\n");
-		strcpy(answers[9], "5\n");
-		strcpy(answers[10], "да");
-		strcpy(answers[11], "д");
+		strcpy(answers[4], "Выбор других городов\n");
+		strcpy(answers[5], "Выход из программы\n");
+		strcpy(answers[6], "1\n");
+		strcpy(answers[7], "2\n");
+		strcpy(answers[8], "3\n");
+		strcpy(answers[9], "4\n");
+		strcpy(answers[10], "5\n");
+		strcpy(answers[11], "6\n");
+		strcpy(answers[12], "да");
+		strcpy(answers[13], "д");
+
 		char bin;
 		scanf("%c", &bin);
 		while (second) {	
 			printf("\nСписок функций:\n\n");
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				printf("%d) %s", i + 1, answers[i]);
 			}
 	    	printf("\nВведите номер или название выбранной функции из данного списка: ");
 		    fgets(ans, 90, stdin);
-	    	if (check_for_exist(ans, answers) == 0 || !strcmp(ans, answers[5])) {
+	    	if (check_for_exist(ans, answers) == 0 || !strcmp(ans, answers[6])) {
 	    		command_for_search(g, start, end, ways, &way);
 	    		printf("\n");
 	    		print_shortest_way(g, ways, way, end);
 	    		way = 0;
-	    	} else if (check_for_exist(ans, answers) == 1 || !strcmp(ans, answers[6])) {
+	    	} else if (check_for_exist(ans, answers) == 1 || !strcmp(ans, answers[7])) {
 	    		command_for_search(g, start, end, ways, &way);
 	    		printf("\n");
 	    		print_longest_way(g, ways, way, end);
 	    		way = 0;
-	    	} else if (check_for_exist(ans, answers) == 2 || !strcmp(ans, answers[7])) {
+	    	} else if (check_for_exist(ans, answers) == 2 || !strcmp(ans, answers[8])) {
 	    		command_for_search(g, start, end, ways, &way);
 	    		printf("\n");
 	    		print_all_ways(g, ways, way, end);
 	    		way = 0;
-	    	} else if (check_for_exist(ans, answers) == 3 || !strcmp(ans, answers[8])) {
+	    	} else if (check_for_exist(ans, answers) == 3 || !strcmp(ans, answers[9])) {
 	    		command_for_search(g, start, end, ways, &way);
 	    		printf("\n");
 	    		print_all_ways(g, ways, way, end);
@@ -93,11 +96,13 @@ int main()
 	    		printf("\n");
 	    		print_longest_way(g, ways, way, end);
 	    		way = 0;
-	    	} else if (check_for_exist(ans, answers) == 4 || !strcmp(ans, answers[9])) {
+	    	} else if (check_for_exist(ans, answers) == 4 || !strcmp(ans, answers[10])) {
+	    		second = 0;
+	    	} else if (check_for_exist(ans, answers) == 5 || !strcmp(ans, answers[11])) {
 	    		printf("\nВы точно хотите выйти [да][нет]: ");
 	    		scanf("%s", ans);
 	    		scanf("%c", &bin);
-	    		if (!strcmp(answers[10], ans) || !strcmp(answers[11], ans)) {
+	    		if (!strcmp(answers[12], ans) || !strcmp(answers[13], ans)) {
 	    			printf("\nСпасибо за пользование нашим сервисом!\n");
 	    			_Exit(EXIT_SUCCESS);
 	    		} 
